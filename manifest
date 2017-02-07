@@ -1,0 +1,21 @@
+# Channel Details
+title=Taylor Home Theater
+subtitle=none
+major_version=1
+minor_version=203
+build_version=20170206
+
+# Channel Assets
+mm_icon_focus_sd=pkg:/images/mm_icon_focus_sd.png
+mm_icon_focus_hd=pkg:/images/mm_icon_focus_hd.png
+mm_icon_focus_fhd=pkg:/images/mm_icon_focus_hd.png
+
+# Splash Screen + Loading Screen Artwork
+splash_screen_sd=pkg:/images/Splash-SD-720x480.png
+splash_screen_hd=pkg:/images/Splash-HD-1280x720.png
+splash_screen_fhd=pkg:/images/Splash-HD-1280x720.png
+splash_color=#808080
+splash_min_time=2500
+
+# Resolution
+ui_resolutions=fhd
