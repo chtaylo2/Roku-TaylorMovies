@@ -80,7 +80,7 @@ Sub onItemSelected()
     m.FindMedia = CreateObject("roSGNode", "FindMedia")
     m.FindMedia.observeField("urlstring", "OnChanged")
       
-    uri = { uri: "https://XXXXXXXXXXXXXXXXXXXXXXXXXXXX?url="+m.top.content.link }
+    uri = { uri: "https://XXXXXXXXXXX/roku/roku-movies/pull_movie.pl?url="+m.top.content.link }
     context = createObject("roSGNode", "Node")
     context.addFields({
       parameters: uri,
@@ -106,7 +106,7 @@ Sub OnContentChange()
   print "DetailsScreen.brs - [OnContentChange]"
   m.description.content           = m.top.content
   m.description.Description.width = "1120"
-  m.poster.uri                    = m.top.content.hdBackgroundImageUrl
+  m.poster.uri                    = m.top.content.hdposterurl
   m.background.uri                = m.top.content.hdBackgroundImageUrl
 End Sub
 

@@ -10,7 +10,32 @@
       text=""/>
 
     <Label
+      id="Quality"
+      color="0xFFFFFF"
+      text=""/>
+
+    <Label
+      id="Genre"
+      color="0xFFFFFF"
+      text=""/>
+
+    <Label
+      id="Runtime"
+      color="0xFFFFFF"
+      text=""/>
+
+    <Label
       id="ReleaseDate"
+      color="0xFFFFFF"
+      text=""/>
+
+    <Label
+      id="Budget"
+      color="0xFFFFFF"
+      text=""/>
+
+    <Label
+      id="Revenue"
       color="0xFFFFFF"
       text=""/>
 
@@ -39,6 +64,12 @@
 
     <!-- Alias to ReleaseDate label -->
     <field id="ReleaseDate"     type="node" alias=""/>
+
+    <field id="Quality"     type="node" alias=""/>
+    <field id="Budget"     type="node" alias=""/>
+    <field id="Revenue"     type="node" alias=""/>
+    <field id="Genre"     type="node" alias=""/>
+    <field id="Runtime"     type="node" alias=""/>
 
     <!-- Content node -->
     <field id="Content"     type="node" onChange="OnContentChanged"/>

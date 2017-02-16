@@ -5,7 +5,12 @@ Sub Init()
   print "Description.brs - [Init]"
   m.top.Title             = m.top.findNode("Title")
   m.top.Description       = m.top.findNode("Description")
+  m.top.Genre             = m.top.findNode("Genre")
+  m.top.Runtime           = m.top.findNode("Runtime")
   m.top.ReleaseDate       = m.top.findNode("ReleaseDate")
+  m.top.Quality           = m.top.findNode("Quality")
+  m.top.Budget            = m.top.findNode("Budget")
+  m.top.Revenue           = m.top.findNode("Revenue")
 End Sub
 
 ' Content change handler
@@ -28,12 +33,54 @@ Sub OnContentChanged()
     end if
   end if
 
+  value = item.Quality
+  if value <> invalid then
+    if value <> ""
+      m.top.Quality.text = "Quality: " + value.toStr()
+    else
+      m.top.Quality.text = "Quality: Unknown"
+    end if
+  end if
+
+  value = item.Genres
+  if value <> invalid then
+    if value <> ""
+      m.top.Genre.text = "Genre: " + value.toStr()
+    else
+      m.top.Genre.text = "Genre: Unknown"
+    end if
+  end if
+
+  value = item.Runtime
+  if value <> invalid then
+    if value <> ""
+      m.top.Runtime.text = "Runtime: " + value.toStr()
+    else
+      m.top.Runtime.text = "Runtime: Unknown"
+    end if
+  end if
+
   value = item.ReleaseDate
   if value <> invalid then
     if value <> ""
-      m.top.ReleaseDate.text = value.toStr()
+      m.top.ReleaseDate.text = "Release Date: " + value.toStr()
     else
       m.top.ReleaseDate.text = "No Release Date"
     end if
   end if
+
+  value = item.Budget
+  if value <> invalid then
+    if value <> ""
+      m.top.Budget.text = "Budget: " + value.toStr()
+    end if
+  end if
+
+  value = item.Revenue
+  if value <> invalid then
+    if value <> ""
+      m.top.Revenue.text = "Revenue: " + value.toStr()
+    end if
+  end if
 End Sub
+

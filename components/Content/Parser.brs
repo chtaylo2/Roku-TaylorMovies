@@ -42,12 +42,20 @@ sub parseResponse()
             for each mediacontentitem in mediacontent
               if mediacontentitem.getname() = "media:thumbnail"
                 item.hdposterurl = mediacontentitem.getattributes().url
-                item.hdbackgroundimageurl = mediacontentitem.getattributes().url
                 item.uri = mediacontentitem.getattributes().url
+              end if
+              if mediacontentitem.getname() = "media:backdrop"
+                item.hdbackgroundimageurl = mediacontentitem.getattributes().url
               end if
             end for
           end if
         end for
+      
+        if item.title = "Unauthorized Device" 
+            sec = CreateObject("roRegistrySection", "Settings")
+            sec.Delete("registration")
+            sec.Flush()   
+        end if
         result.push(item)
       end if
     

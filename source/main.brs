@@ -27,7 +27,15 @@ sub Main(input as Dynamic)
       'launch/prep the content mapped to the contentID here
     end if
   end if
-  showHeroScreen()
+  
+  registrationCheck = RegRead("registration","Settings")
+
+  if registrationCheck="success"
+     showHeroScreen()
+  else
+     register_system()
+  end if
+  
 end sub
 
 ' Initializes the scene and shows the main homepage.
@@ -48,3 +56,55 @@ sub showHeroScreen()
     end if
   end while
 end sub
+
+Function register_system()
+    port   = CreateObject("roMessagePort")
+    pin    = CreateObject("roPinEntryDialog")
+    device = CreateObject("roDeviceInfo")
+    pin.SetMessagePort(port)
+    
+    print "UUID: "; device.GetDeviceUniqueId()
+    print "Friendly: "; device.GetFriendlyName()
+    
+    pin.SetTitle("Enter Registration Code")
+    pin.SetNumPinEntryFields(9)
+    pin.AddButton(0, "OK")
+    pin.AddButton(1, "Cancel")
+    pin.Show()
+    
+    while true
+        msg = wait(0, pin.GetMessagePort())
+        
+        if type(msg) = "roPinEntryDialogEvent"
+            if msg.isScreenClosed()
+                print "Screen closed"
+                return invalid
+            else if msg.isButtonPressed()
+                buttonID = msg.GetIndex()
+                print "buttonID pressed: "; buttonID
+                if (buttonID = 0)
+                    pinCode = pin.Pin()
+                    print "Got pin: " + pinCode
+                    http = NewHttp("https://XXXXXXXXXXX/roku/roku-movies/register.pl?device=" + URLEncode(device.GetDeviceUniqueId()) + "&name=" + URLEncode(device.GetFriendlyName()) + "&code=" + pinCode)
+                    status=http.getToStringWithTimeout(10)
+                    print "HERE: "; status
+                    
+                    if (status = "Success")
+                        RegWrite("registration","success","Settings")
+                    end if
+
+                    return "true"
+                else if (buttonID = 1)
+                    print "Cancel Pressed"
+                    pin.Close()
+                    return invalid
+                end if
+                return "true"
+            else
+                print "Unknown event: "; msg.GetType(); " msg: "; msg.GetMessage()
+                return invalid
+            end if
+        end if
+    end while
+End Function
+

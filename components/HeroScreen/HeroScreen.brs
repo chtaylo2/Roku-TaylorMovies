@@ -9,18 +9,20 @@ sub Init()
   m.RowList       =   m.top.findNode("RowList")
   m.background    =   m.top.findNode("Background")
 
+  device = CreateObject("roDeviceInfo")
+
   'Create a task node to fetch the UI content and populate the screen
   m.UriHandler = CreateObject("roSGNode", "UriHandler")
   m.UriHandler.observeField("content", "onContentChanged")
 
   'Make a request for each "row" in the UI (in the order that you want content filled)
   URLs = [
-    "https://XXXXXXXXXXXXXXXXXXXXXXXX?start=0&end=6",
-    "https://XXXXXXXXXXXXXXXXXXXXXXXX?start=1&end=6",
-    "https://XXXXXXXXXXXXXXXXXXXXXXXX?start=2&end=6",
-    "https://XXXXXXXXXXXXXXXXXXXXXXXX?start=3&end=6",
-    "https://XXXXXXXXXXXXXXXXXXXXXXXX?start=4&end=6",
-    "https://XXXXXXXXXXXXXXXXXXXXXXXX?start=5&end=6"
+    "https://XXXXXXXXXXX/roku/roku-movies/display.pl?start=0&end=6&uuid=" + device.GetDeviceUniqueId(),
+    "https://XXXXXXXXXXX/roku/roku-movies/display.pl?start=1&end=6&uuid=" + device.GetDeviceUniqueId(),
+    "https://XXXXXXXXXXX/roku/roku-movies/display.pl?start=2&end=6&uuid=" + device.GetDeviceUniqueId(),
+    "https://XXXXXXXXXXX/roku/roku-movies/display.pl?start=3&end=6&uuid=" + device.GetDeviceUniqueId(),
+    "https://XXXXXXXXXXX/roku/roku-movies/display.pl?start=4&end=6&uuid=" + device.GetDeviceUniqueId(),
+    "https://XXXXXXXXXXX/roku/roku-movies/display.pl?start=5&end=6&uuid=" + device.GetDeviceUniqueId()
   ]
   makeRequest(URLs,"Parser")
 

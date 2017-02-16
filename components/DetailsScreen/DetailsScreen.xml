@@ -41,10 +41,19 @@
       color="0x000000"
       opacity="0.8" />
 
+    <!-- Black hud at bottom of the Details Screen -->
+    <Rectangle
+      id="HUDRectangle"
+      color="0x000000FF"
+      width="1920"
+      height="1080"
+      opacity="0.5"
+      translation="[0, 0]" />
+
     <!-- Control buttons (Button List) -->
     <LabelList
       id="Buttons"
-      translation="[1440,480]"
+      translation="[1460,880]"
       color="0xFFFFFFFF"
       focusedColor="0x333333FF"
       numRows="7"
@@ -52,26 +61,18 @@
       itemSpacing="[0,20]"
       itemSize="[300, 35]" />
 
-    <!-- Black hud at bottom of the Details Screen -->
-    <Rectangle
-      id="HUDRectangle"
-      color="0x000000FF"
-      width="1920"
-      height="300"
-      translation="[0, 780]" />
-
     <!-- Item poster -->
     <Poster
       id="Poster"
-      translation="[120, 825]"
-      width="300"
-      height="178" />
+      translation="[120, 205]"
+      width = "400"
+      height="510" />
 
     <!-- Item description -->
     <Description
       id="Description"
-      translation="[500, 800]"
-      itemSpacings="[7, 16]" />
+      translation="[600, 200]"
+      itemSpacings="[50, 10, 10, 10, 50, 10, 50]" />
 
     <!-- Overhang Node (has to be rendered after others) -->
     <Overhang
