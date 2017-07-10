@@ -2,8 +2,8 @@
 title=Taylor Home Theater
 subtitle=none
 major_version=1
-minor_version=301
-build_version=20170216
+minor_version=400
+build_version=20170709
 
 # Channel Assets
 mm_icon_focus_sd=pkg:/images/mm_icon_focus_sd.png

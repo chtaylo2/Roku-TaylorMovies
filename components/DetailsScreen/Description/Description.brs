@@ -33,7 +33,7 @@ Sub OnContentChanged()
     end if
   end if
 
-  value = item.Quality
+  value = item.longQuality
   if value <> invalid then
     if value <> ""
       m.top.Quality.text = "Quality: " + value.toStr()

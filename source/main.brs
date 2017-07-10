@@ -30,11 +30,11 @@ sub Main(input as Dynamic)
   
   registrationCheck = RegRead("registration","Settings")
 
-  if registrationCheck="success"
+  'if registrationCheck="success"
      showHeroScreen()
-  else
-     register_system()
-  end if
+  'else
+  '   register_system()
+  'end if
   
 end sub
 

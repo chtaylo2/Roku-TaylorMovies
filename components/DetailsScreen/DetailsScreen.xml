@@ -66,7 +66,7 @@
       id="Poster"
       translation="[120, 205]"
       width = "400"
-      height="510" />
+      height="551" />
 
     <!-- Item description -->
     <Description
@@ -74,6 +74,26 @@
       translation="[600, 200]"
       itemSpacings="[50, 10, 10, 10, 50, 10, 50]" />
 
+    <!-- The spinning wheel for when content is loading -->
+    <LoadingIndicator
+      id="LoadingIndicator"
+      imageUri="pkg:/components/LoadingIndicator/loader.png"
+      clockwise="true"
+      spinInterval="2"
+      fadeInterval="0.5"
+      spacing="20"
+      imageWidth="100"
+      text="Finding movie..."
+      width="1920"
+      height="1080"
+      centered="false"
+      translation="[0, 0]"
+      textPadding="10"
+      font="font:SmallBoldSystemFont"
+      backgroundColor="0x551A8B"
+      backgroundOpacity="0"
+      visible="false" />
+    
     <!-- Overhang Node (has to be rendered after others) -->
     <Overhang
       showClock="true"

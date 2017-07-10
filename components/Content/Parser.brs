@@ -33,6 +33,18 @@ sub parseResponse()
         ' Get all <item> attributes
         for each xmlitem in itemaa
           item[xmlitem.getname()] = xmlitem.gettext()
+          if xmlitem.getname() = "ReleaseDate"
+            item.year = xmlitem.gettext().Split("-")[0]
+          end if
+          if xmlitem.getname() = "Quality"
+            if xmlitem.gettext() = "HD"
+              item.longQuality = "High Definiton (HD)"
+            else if xmlitem.gettext() = "HQ"
+              item.longQuality = "High Quality (HQ)"
+            else
+              item.longQuality = xmlitem.gettext()
+            end if
+          end if
           if xmlitem.getname() = "media:content"
             item.stream = {url : xmlitem.url}
             item.url = xmlitem.getattributes().url
@@ -78,27 +90,27 @@ sub parseResponse()
 
   list = [
     {
-        Title:"Page 1 (newest)"
+        Title:"Row 1"
         ContentList : result
     }
     {
-        Title:"Page 2"
+        Title:"Row 2"
         ContentList : result
     }
     {
-        Title:"Page 3"
+        Title:"Row 3"
         ContentList : result
     }
     {
-        Title:"Page 4"
+        Title:"Row 4"
         ContentList : result
     }
     {
-        Title:"Page 5"
+        Title:"Row 5"
         ContentList : result
     }
     {
-        Title:"Page 6"
+        Title:"Row 6"
         ContentList : result
     }
   ]
@@ -122,7 +134,7 @@ function createRow(list as object, num as Integer)
   print "Parser.brs - [createRow]"
   Parent = createObject("RoSGNode", "ContentNode")
   row = createObject("RoSGNode", "ContentNode")
-  row.Title = list[num].Title
+  row.Title     = list[num].Title
   for each itemAA in list[num].ContentList
     item = createObject("RoSGNode","ContentNode")
     AddAndSetFields(item, itemAA)

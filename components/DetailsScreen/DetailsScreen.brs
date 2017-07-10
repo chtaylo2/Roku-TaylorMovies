@@ -9,7 +9,6 @@ Function Init()
   m.top.observeField("focusedChild", "OnFocusedChildChange")
 
   m.port = createObject("roMessagePort")
-
   m.buttons           =   m.top.findNode("Buttons")
   m.videoPlayer       =   m.top.findNode("VideoPlayer")
   m.poster            =   m.top.findNode("Poster")
@@ -17,10 +16,13 @@ Function Init()
   m.background        =   m.top.findNode("Background")
   m.fadeIn            =   m.top.findNode("fadeinAnimation")
   m.fadeOut           =   m.top.findNode("fadeoutAnimation")
-
+  
+  ' The spinning wheel node
+  m.LoadingIndicator =    m.top.findNode("LoadingIndicator")
+  
   ' create buttons
   result = []
-  for each button in ["Play Movie", "Back to Listings"]
+  for each button in ["Play Movie"]
     result.push({title : button})
   end for
   m.buttons.content = ContentList2SimpleNode(result)
@@ -29,6 +31,12 @@ End Function
 ' set proper focus to buttons if Details opened and stops Video if Details closed
 Sub onVisibleChange()
   print "DetailsScreen.brs - [onVisibleChange]"
+  
+  m.description.visible      = "true"
+  m.poster.visible           = "true"
+  m.buttons.visible          = "true"
+  m.LoadingIndicator.visible = "false"
+  
   if m.top.visible
     m.fadeIn.control="start"
     m.buttons.jumpToItem = 0
@@ -75,20 +83,31 @@ End Sub
 ' on Button press handler
 Sub onItemSelected()
   print "DetailsScreen.brs - [onItemSelected]"
+  device = CreateObject("roDeviceInfo")
+
   ' first button is Play
   if m.top.itemSelected = 0
+  
+    m.LoadingIndicator.visible = "true"
+    m.LoadingIndicator.control = "start"
+    m.description.visible      = "false"
+    m.poster.visible           = "false"
+    m.buttons.visible          = "false"
+    
     m.FindMedia = CreateObject("roSGNode", "FindMedia")
     m.FindMedia.observeField("urlstring", "OnChanged")
       
-    uri = { uri: "https://XXXXXXXXXXX/roku/roku-movies/pull_movie.pl?url="+m.top.content.link }
+    uri = { uri: "https://XXXXXXXXXXX/roku/roku-movies/pull_movie.pl?url="+m.top.content.link+"&uuid="+device.GetDeviceUniqueId() }
     context = createObject("roSGNode", "Node")
     context.addFields({
       parameters: uri,
       response: {}
     })
+
     m.FindMedia.request = {
       context: context
     }
+
   end if
 End Sub
 
@@ -96,6 +115,12 @@ End Sub
 sub onChanged()
   print "DetailsScreen.brs - [onChanged]"
   m.top.content.url  = m.FindMedia.urlstring
+   
+  headers = []
+  headers.push("Referer: " + m.FindMedia.sitestring)
+  headers.push("User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36")
+  m.top.content.HttpHeaders = headers
+
   m.videoPlayer.content   = m.top.content
   
   playMovie()
@@ -115,6 +140,13 @@ Sub playMovie()
   m.videoPlayer.visible = true
   m.videoPlayer.setFocus(true)
   m.videoPlayer.control = "play"
+  
+  m.LoadingIndicator.control = "stop"
+  m.LoadingIndicator.visible = "false"
+  m.description.visible      = "true"
+  m.poster.visible           = "true"
+  m.buttons.visible          = "true"
+  
   m.videoPlayer.observeField("state", "OnVideoPlayerStateChange")
 End Sub
 

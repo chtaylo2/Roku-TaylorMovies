@@ -8,7 +8,9 @@
     <!-- Contains the response content -->
     <field id="content" type="node"/>
 	
-	<field id="urlstring" type="string" />
+    <field id="urlstring" type="string" />
+    <field id="sitestring" type="string" />
+
     <!-- The # of rows to populate -->
     <field id="numRows" type="integer"/>
     <!-- # of rows of content received -->

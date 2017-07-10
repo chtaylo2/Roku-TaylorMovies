@@ -197,6 +197,9 @@ sub processResponse(msg as Object)
 		if xmlitem.getname() = "location"
 		  m.top.urlstring=xmlitem.gettext()
 		end if
+		if xmlitem.getname() = "hiddensite"
+		  m.top.sitestring=xmlitem.gettext()
+		end if
 	  end for
     else
       print "Error: status code was: " + (msg.GetResponseCode()).toStr()

@@ -14,7 +14,7 @@
 
     <!-- The main content -->
     <RowList
-	    id="RowList"
+	  id="RowList"
       itemComponentName="customItem"
       focusXOffset="[165]"
       itemSize="[1920,220]"
@@ -23,7 +23,7 @@
       rowHeights="[615,615,615,615,615,615]"
       rowItemSize="[[375,526],[375,526],[375,526],[375,526],[375,526],[375,526]]"
       rowItemSpacing="[[30,0]]"
-      rowLabelOffset="[[165,8]]"
+      rowLabelOffset="[[165,12]]"
       showRowLabel="[true,true,true,true,true,true]"
       showRowCounter="[true,true,true,true,true,true]"
       translation="[0,155]"/>

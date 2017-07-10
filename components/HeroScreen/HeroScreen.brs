@@ -68,9 +68,12 @@ sub OnItemFocused()
   'and element 1 contains the index of the focused item in that row.
   if itemFocused.Count() = 2 then
     focusedContent            = m.top.content.getChild(itemFocused[0]).getChild(itemFocused[1])
+    focusedRow                = m.top.content.getChild(itemFocused[0])
     if focusedContent <> invalid then
       m.top.focusedContent    = focusedContent
       m.background.uri        = focusedContent.hdBackgroundImageUrl
+      splitTitle              = focusedRow.Title.Split(" -- ")
+      focusedRow.Title        = splitTitle[0] + " -- " + focusedContent.Title + " - " + focusedContent.year + " - (" + focusedContent.Quality + ")"
     end if
   end if
 end sub
