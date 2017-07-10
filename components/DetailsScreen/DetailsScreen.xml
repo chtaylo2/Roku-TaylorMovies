@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<!-- node that renders details screen. handles start of video playback -->
+<component name="DetailsScreen" extends="Group" initialFocus="Buttons">
+  <children>
+
+    <!-- Background poster -->
+    <Poster
+      id="Background"
+      width="1920"
+      height="1080" />
+
+    <Animation
+      id="fadeinAnimation"
+      repeat="false"
+      duration="0.3">
+      <FloatFieldInterpolator
+        id="backgroundInterpolator"
+        key="[0.0, 1.0]"
+        keyValue="[0.0, 1.0]"
+        fieldToInterp="Background.opacity"/>
+    </Animation>
+
+    <Animation
+      id="fadeoutAnimation"
+      repeat="false"
+      duration="0.3">
+      <FloatFieldInterpolator
+        id="backgroundInterpolator"
+        key="[0.0, 1.0]"
+        keyValue="[1.0, 0.0]"
+        fieldToInterp="Background.opacity"/>
+    </Animation>
+
+    <!-- Background fade -->
+    <Rectangle
+      translation="[0,0]"
+      width="1920"
+      height="1080"
+      color="0x000000"
+      opacity="0.8" />
+
+    <!-- Black hud at bottom of the Details Screen -->
+    <Rectangle
+      id="HUDRectangle"
+      color="0x000000FF"
+      width="1920"
+      height="1080"
+      opacity="0.5"
+      translation="[0, 0]" />
+
+    <!-- Control buttons (Button List) -->
+    <LabelList
+      id="Buttons"
+      translation="[1460,880]"
+      color="0xFFFFFFFF"
+      focusedColor="0x333333FF"
+      numRows="7"
+      vertFocusAnimationStyle="floatingFocus"
+      itemSpacing="[0,20]"
+      itemSize="[300, 35]" />
+
+    <!-- Item poster -->
+    <Poster
+      id="Poster"
+      translation="[120, 205]"
+      width = "400"
+      height="551" />
+
+    <!-- Item description -->
+    <Description
+      id="Description"
+      translation="[600, 200]"
+      itemSpacings="[50, 10, 10, 10, 50, 10, 50]" />
+
+    <!-- The spinning wheel for when content is loading -->
+    <LoadingIndicator
+      id="LoadingIndicator"
+      imageUri="pkg:/components/LoadingIndicator/loader.png"
+      clockwise="true"
+      spinInterval="2"
+      fadeInterval="0.5"
+      spacing="20"
+      imageWidth="100"
+      text="Finding movie..."
+      width="1920"
+      height="1080"
+      centered="false"
+      translation="[0, 0]"
+      textPadding="10"
+      font="font:SmallBoldSystemFont"
+      backgroundColor="0x551A8B"
+      backgroundOpacity="0"
+      visible="false" />
+    
+    <!-- Overhang Node (has to be rendered after others) -->
+    <Overhang
+      showClock="true"
+      title="Taylor Home Theater"
+      logoUri="pkg:/images/overhang-logo.png" />
+
+    <!-- Playback node -->
+    <Video
+      id="VideoPlayer"
+      visible="false"
+      translation="[0, 0]"
+      width="1920"
+      height="1080" />
+
+  </children>
+
+    <interface>
+      <!-- Button press handler -->
+      <field id="itemSelected" type="integer" alwaysnotify="true" alias="Buttons.itemSelected" onChange="onItemSelected" />
+      <!-- Playback flag -->
+      <field id="videoPlayerVisible" type="bool" alwaysnotify="true" alias="VideoPlayer.visible"  onChange="onVideoVisibleChange" />
+      <!-- Content fields -->
+      <field id="content" type="node" alwaysnotify="true" onChange="OnContentChange" />
+    </interface>
+
+    <!-- main handler -->
+    <script type="text/brightscript" uri="pkg:/components/DetailsScreen/DetailsScreen.brs" />
+</component>
